@@ -1,0 +1,72 @@
+/* Site header and main navigation. White header with the full-color logo (the version
+   designed for light backgrounds). Mobile: a Menu button reveals the links (js/nav.js).
+   Without JavaScript the links simply show. */
+
+.site-header {
+  position: relative;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+.site-header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-16);
+  min-height: 72px;
+  padding-block: var(--space-12);
+}
+.site-header__logo { display: block; flex-shrink: 0; }
+.site-header__logo img { width: 160px; height: auto; }
+
+.nav-toggle {
+  display: none;
+  align-items: center;
+  gap: var(--space-8);
+  min-height: 48px;
+  padding: var(--space-8) var(--space-16);
+  border: 2px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-weight: var(--font-weight-semibold);
+}
+.nav-toggle__icon { position: relative; width: 20px; height: 2px; background: currentColor; }
+.nav-toggle__icon::before,
+.nav-toggle__icon::after { content: ""; position: absolute; left: 0; width: 20px; height: 2px; background: currentColor; transition: transform var(--duration-fast); }
+.nav-toggle__icon::before { top: -6px; }
+.nav-toggle__icon::after { top: 6px; }
+.nav-toggle[aria-expanded="true"] .nav-toggle__icon { background: transparent; }
+.nav-toggle[aria-expanded="true"] .nav-toggle__icon::before { transform: translateY(6px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .nav-toggle__icon::after { transform: translateY(-6px) rotate(-45deg); }
+
+.site-nav { width: 100%; }
+.site-nav__list { list-style: none; padding: 0; display: flex; flex-direction: column; }
+.site-nav__list a {
+  display: block;
+  padding: var(--space-12) 0;
+  color: var(--color-text);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-border);
+}
+.site-nav__list a:hover { color: var(--color-link); }
+.site-nav__list a[aria-current="page"] { color: var(--color-link); }
+.site-nav__cta { margin-top: var(--space-16); width: 100%; }
+
+/* With JS, the list collapses behind the Menu button on small screens. */
+.js .nav-toggle { display: inline-flex; }
+.js .site-nav { display: none; padding-bottom: var(--space-16); }
+.js .site-nav.is-open { display: block; }
+
+@media (min-width: 1024px) {
+  .site-header__inner { flex-wrap: nowrap; }
+  .site-header__logo img { width: 180px; }
+  .js .nav-toggle { display: none; }
+  .site-nav, .js .site-nav { display: flex; align-items: center; justify-content: flex-end; gap: var(--space-32); width: auto; padding: 0; }
+  .site-nav__list { flex-direction: row; gap: var(--space-32); }
+  .site-nav__list a { padding: var(--space-8) 0; border-bottom: 2px solid transparent; }
+  .site-nav__list a:hover,
+  .site-nav__list a[aria-current="page"] { border-bottom-color: var(--color-accent); color: var(--color-text); }
+  .site-nav__cta { margin-top: 0; width: auto; }
+}

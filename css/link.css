@@ -1,0 +1,39 @@
+/* Links. Body links are always underlined: color alone isn't enough (the current site's green links fail this). */
+
+a {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  transition: color var(--duration-fast), text-decoration-thickness var(--duration-fast);
+}
+a:hover { color: var(--color-link-hover); text-decoration-thickness: 2px; }
+
+/* Tertiary action: a link with an arrow. */
+.link-arrow {
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+.link-arrow::after { content: "→"; transition: transform var(--duration-fast); }
+.link-arrow:hover { text-decoration: underline; }
+.link-arrow:hover::after { transform: translateX(4px); }
+
+/* Quiet link: navigation and footer lists, where position already says "link". */
+.link-quiet { color: inherit; text-decoration: none; }
+.link-quiet:hover { color: var(--color-link-hover); text-decoration: underline; }
+
+/* Skip link: first thing in <body>, visible on focus. */
+.skip-link {
+  position: absolute;
+  left: var(--space-16);
+  top: var(--space-16);
+  z-index: 100;
+  padding: var(--space-8) var(--space-16);
+  background: var(--color-surface);
+  border-radius: var(--radius-sm);
+  transform: translateY(-200%);
+}
+.skip-link:focus { transform: none; }

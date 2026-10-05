@@ -1,0 +1,196 @@
+/* Mockups: drawn previews of what the webinar shows. They are illustrations, not screenshots:
+   skeleton lines stand in for content, so nothing on them is a made-up fact. Mark each mockup
+   aria-hidden (or give it a short alt-style label) and say the real thing in the page's text.
+
+   .float-card    a small raised card: icon, title, one line, skeleton lines
+   .skeleton      grey lines standing in for text; .sheet-grid for a spreadsheet
+   .window        an app window frame; .mini-slide inside it shows an on-brand slide
+   .call          a video-call layout: shared slide, presenter tiles, controls
+   .collage       the hero arrangement: a window with float cards around it (stacks on phones)
+   .live-chip     "Live on Microsoft Teams" style label with a pulsing orange dot */
+
+.float-card {
+  --color-text: var(--blue-950);
+  --color-text-heading: var(--blue-800);
+  --color-text-muted: var(--neutral-600);
+  display: grid;
+  gap: var(--space-12);
+  padding: var(--space-16);
+  background: var(--white);
+  color: var(--color-text);
+  border: 1px solid var(--neutral-200);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+.float-card__head { display: flex; align-items: center; gap: var(--space-12); }
+.float-card__title { font-size: var(--text-sm); line-height: var(--leading-sm); font-weight: var(--font-weight-bold); color: var(--color-text-heading); }
+.float-card__meta { font-size: var(--text-xs); line-height: var(--leading-xs); color: var(--color-text-muted); }
+
+.skeleton { display: grid; gap: var(--space-8); }
+.skeleton i { display: block; height: var(--space-8); border-radius: var(--radius-pill); background: var(--neutral-200); }
+.skeleton i:nth-child(2n) { width: 82%; }
+.skeleton i:last-child { width: 58%; }
+.skeleton-accent i:first-child { background: var(--blue-200); }
+
+.sheet-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4); }
+.sheet-grid i { display: block; height: var(--space-12); border-radius: 2px; background: var(--neutral-100); }
+.sheet-grid i:nth-child(-n + 4) { background: var(--blue-100); }
+.sheet-grid i:nth-child(4n) { background: var(--orange-100); }
+
+.prompt {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  padding: var(--space-8) var(--space-12);
+  border-radius: var(--radius-pill);
+  background: var(--neutral-100);
+  font-size: var(--text-xs);
+  line-height: var(--leading-xs);
+  color: var(--neutral-700);
+}
+.prompt .icon { color: var(--blue-600); }
+
+/* ---------- Window ---------- */
+.window {
+  overflow: hidden;
+  background: var(--white);
+  border: 1px solid var(--neutral-200);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+.window__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  padding: var(--space-12) var(--space-16);
+  background: var(--neutral-50);
+  border-bottom: 1px solid var(--neutral-200);
+  font-size: var(--text-xs);
+  line-height: var(--leading-xs);
+  color: var(--neutral-600);
+}
+.window__bar::before {
+  content: "";
+  flex-shrink: 0;
+  width: var(--space-8);
+  height: var(--space-8);
+  margin-right: var(--space-32);
+  border-radius: 50%;
+  background: var(--neutral-300);
+  box-shadow: var(--space-12) 0 0 var(--neutral-300), var(--space-24) 0 0 var(--neutral-300);
+}
+.window__bar .live-chip { margin-left: auto; }
+.window__body { padding: var(--space-16); }
+
+/* A slide in miniature: the real title-slide look. Text is large and bold so white on blue passes. */
+.mini-slide {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: var(--space-8);
+  aspect-ratio: 16 / 9;
+  padding: var(--space-24);
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--blue-500);
+  color: var(--white);
+}
+.mini-slide img { position: absolute; top: var(--space-24); left: var(--space-24); width: 96px; height: auto; }
+.mini-slide__title { max-width: 16ch; font-size: var(--text-lg); line-height: var(--leading-lg); font-weight: var(--font-weight-bold); color: var(--white); }
+.mini-slide__rule { width: var(--space-32); height: var(--space-4); border-radius: var(--radius-pill); background: var(--orange-500); }
+.mini-slide .rings { --rings-size: 260px; --rings-color: color-mix(in srgb, var(--white) 28%, transparent); z-index: 0; top: -20%; right: -18%; }
+.mini-slide__title, .mini-slide__rule, .mini-slide .skeleton { position: relative; }
+
+/* ---------- Call ---------- */
+.call { display: grid; gap: var(--space-12); }
+@media (min-width: 768px) { .call { grid-template-columns: 1fr minmax(0, 30%); } }
+.call__people { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-12); }
+@media (min-width: 768px) { .call__people { grid-template-columns: 1fr; align-content: start; } }
+.call__tile {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-md);
+  background: var(--blue-900);
+}
+.call__name {
+  position: absolute;
+  left: var(--space-8);
+  bottom: var(--space-8);
+  padding: 2px var(--space-8);
+  border-radius: var(--radius-sm);
+  background: var(--blue-950);
+  color: var(--white);
+  font-size: var(--text-xs);
+  line-height: var(--leading-xs);
+}
+.call__controls { display: flex; justify-content: center; gap: var(--space-12); padding-top: var(--space-16); grid-column: 1 / -1; }
+.call__controls span {
+  display: grid;
+  place-items: center;
+  width: var(--space-48);
+  height: var(--space-48);
+  border-radius: 50%;
+  background: var(--neutral-100);
+  color: var(--blue-800);
+}
+.call__controls span:last-child { background: var(--orange-500); color: var(--blue-950); }
+
+.live-chip {
+  display: inline-flex;
+  white-space: nowrap;
+  align-items: center;
+  gap: var(--space-8);
+  padding: var(--space-4) var(--space-12);
+  border-radius: var(--radius-pill);
+  background: var(--white);
+  border: 1px solid var(--neutral-200);
+  color: var(--blue-800);
+  font-size: var(--text-xs);
+  line-height: var(--leading-xs);
+  font-weight: var(--font-weight-semibold);
+}
+.live-chip::before {
+  content: "";
+  width: var(--space-8);
+  height: var(--space-8);
+  border-radius: 50%;
+  background: var(--orange-500);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--orange-500) 60%, transparent);
+  animation: live-pulse 2s ease-out infinite;
+}
+@keyframes live-pulse { to { box-shadow: 0 0 0 var(--space-8) transparent; } }
+
+/* ---------- Collage ----------
+   Phones: the window, then the cards in a grid. Desktop: the cards float around the window. */
+.collage { position: relative; display: grid; gap: var(--space-16); }
+.collage > .rings { --rings-size: 860px; display: none; }
+.collage__cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-16); }
+.collage__extra { display: none; }
+@media (min-width: 1024px) {
+  .collage { display: block; min-height: 540px; }
+  .collage__main { position: absolute; top: 72px; left: var(--space-48); right: var(--space-24); }
+  .collage__cards { display: contents; }
+  .collage__extra { display: grid; }
+  .collage > .rings { display: block; top: 19%; }
+  .collage .float-card { position: absolute; width: 248px; animation: float 7s ease-in-out infinite; }
+  .collage .float-card:nth-child(1) { top: 0; left: 0; }
+  .collage .float-card:nth-child(2) { top: 168px; right: calc(var(--space-24) * -1); animation-delay: -2s; }
+  .collage .float-card:nth-child(3) { bottom: 0; left: var(--space-8); animation-delay: -4s; }
+  .collage .float-card:nth-child(4) { bottom: var(--space-24); right: var(--space-32); width: 220px; animation-delay: -5.5s; }
+}
+@keyframes float { 50% { translate: 0 calc(var(--space-8) * -1); } }
+
+/* ---------- Facts strip (on the brand band) ---------- */
+.facts { display: grid; gap: var(--space-24); }
+@media (min-width: 768px) { .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1024px) { .facts { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.facts > div { display: flex; align-items: center; gap: var(--space-16); }
+.facts .icon-tile { background: var(--blue-800); box-shadow: none; }
+.facts p { font-weight: var(--font-weight-bold); }
+
+/* A content slide in miniature (white). */
+.mini-slide-light { justify-content: flex-start; gap: var(--space-16); background: var(--white); border: 1px solid var(--neutral-200); }
+.mini-slide-light .mini-slide__title { color: var(--blue-800); }

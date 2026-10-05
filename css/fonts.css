@@ -1,0 +1,7 @@
+/* Aileron: the logo's secondary typeface, used for everything (decision D-05).
+   Paths are relative to this file. The files are CC0 (see brand/README.md). */
+@font-face { font-family: "Aileron"; font-weight: 400; font-style: normal; font-display: swap; src: url("../fonts/aileron/Aileron-Regular.otf") format("opentype"); }
+@font-face { font-family: "Aileron"; font-weight: 400; font-style: italic; font-display: swap; src: url("../fonts/aileron/Aileron-Italic.otf") format("opentype"); }
+@font-face { font-family: "Aileron"; font-weight: 600; font-style: normal; font-display: swap; src: url("../fonts/aileron/Aileron-SemiBold.otf") format("opentype"); }
+@font-face { font-family: "Aileron"; font-weight: 700; font-style: normal; font-display: swap; src: url("../fonts/aileron/Aileron-Bold.otf") format("opentype"); }
+@font-face { font-family: "Aileron"; font-weight: 900; font-style: normal; font-display: swap; src: url("../fonts/aileron/Aileron-Black.otf") format("opentype"); }

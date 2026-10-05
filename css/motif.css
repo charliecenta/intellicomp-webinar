@@ -1,0 +1,128 @@
+/* Motifs: the decorative layer, for web pages and ads (never slides or email).
+   Drawn from the logo's construction (assets/motif/rings.svg): circle pairs and four small circles,
+   as thin lines only. Decoration only: always aria-hidden, never carries meaning,
+   never yellow or green. One or two per section at most.
+
+   .glow          soft light behind a section (put it on the section, with .has-motif)
+   .rings         the construction drawing; place with .rings-top-right / -bottom-left / -center
+   .icon          an inline SVG icon from the page's sprite (<svg class="icon"><use href="#i-mail"/></svg>)
+   .icon-tile     an icon on a rounded tile: blue (default), -orange, -deep, -soft
+   .avatar        initials in a circle, for people without a photo yet; .avatar-lg + .avatar-ringed for portraits */
+
+.has-motif { position: relative; isolation: isolate; overflow: hidden; }
+.has-motif > .container { position: relative; }
+
+/* ---------- Glow ---------- */
+.glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  /* Phones: the light stays in the top corner, away from body text. */
+  background:
+    radial-gradient(80% 30% at 100% 0%, color-mix(in srgb, var(--blue-200) 45%, transparent), transparent 70%),
+    linear-gradient(180deg, var(--white) 0%, var(--blue-50) 100%);
+}
+@media (min-width: 1024px) {
+  /* Desktop: the light sits behind the right-hand column (art or a card), not behind body text. */
+  .glow::before {
+    background:
+      radial-gradient(45% 60% at 88% 18%, color-mix(in srgb, var(--blue-200) 60%, transparent), transparent 70%),
+      radial-gradient(35% 45% at 4% 96%, color-mix(in srgb, var(--orange-100) 80%, transparent), transparent 70%),
+      linear-gradient(180deg, var(--white) 0%, var(--blue-50) 100%);
+  }
+}
+/* On the colored surfaces the glow only darkens or barely lightens, so white text keeps its contrast. */
+.surface-brand.glow::before {
+  background:
+    radial-gradient(45% 70% at 92% 0%, color-mix(in srgb, var(--blue-400) 30%, transparent), transparent 70%),
+    radial-gradient(40% 80% at 0% 100%, color-mix(in srgb, var(--blue-700) 60%, transparent), transparent 70%);
+}
+.surface-deep.glow::before {
+  background:
+    radial-gradient(45% 70% at 90% 10%, color-mix(in srgb, var(--blue-600) 45%, transparent), transparent 70%),
+    radial-gradient(35% 60% at 5% 100%, color-mix(in srgb, var(--blue-500) 25%, transparent), transparent 70%);
+}
+
+/* ---------- Rings ----------
+   The logo construction, drawn by the logo's designer (assets/motif/rings.svg): two circle pairs and
+   the four circles where the mark's dot, joint and leg ends sit. The drawing is a mask,
+   so its lines take --rings-color. Lines only, never a fill. Lines stay 1px (2px with
+   .rings-bold, for ads that are seen at half size) at any size. */
+.rings {
+  --rings-size: 560px;
+  --rings-color: var(--blue-200);
+  --rings-art: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2442.54 1277.67'%3E%3Cg fill='none' stroke='%23000' stroke-width='1' vector-effect='non-scaling-stroke'%3E%3Ccircle cx='638.83' cy='638.83' r='526.83' vector-effect='non-scaling-stroke'/%3E%3Ccircle cx='638.83' cy='638.83' r='638.33' vector-effect='non-scaling-stroke'/%3E%3Ccircle cx='1803.71' cy='638.83' r='526.83' vector-effect='non-scaling-stroke'/%3E%3Ccircle cx='1803.71' cy='638.83' r='638.33' vector-effect='non-scaling-stroke'/%3E%3Ccircle cx='1220.57' cy='661.31' r='55.2' vector-effect='non-scaling-stroke'/%3E%3Ccircle cx='1220.57' cy='441.06' r='55.2' vector-effect='non-scaling-stroke'/%3E%3Ccircle cx='1100.38' cy='995.36' r='55.2' vector-effect='non-scaling-stroke'/%3E%3Ccircle cx='1341.05' cy='995.36' r='55.2' vector-effect='non-scaling-stroke'/%3E%3C/g%3E%3C/svg%3E");
+  position: absolute;
+  z-index: -1;
+  width: var(--rings-size);
+  aspect-ratio: 2442.54 / 1277.67;
+  pointer-events: none;
+}
+.rings::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--rings-color);
+  -webkit-mask: var(--rings-art) center / 100% 100% no-repeat;
+  mask: var(--rings-art) center / 100% 100% no-repeat;
+}
+.rings-bold { --rings-art: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2442.54 1277.67'%3E%3Cg fill='none' stroke='%23000' stroke-width='2' vector-effect='non-scaling-stroke'%3E%3Ccircle cx='638.83' cy='638.83' r='526.83' vector-effect='non-scaling-stroke'/%3E%3Ccircle cx='638.83' cy='638.83' r='638.33' vector-effect='non-scaling-stroke'/%3E%3Ccircle cx='1803.71' cy='638.83' r='526.83' vector-effect='non-scaling-stroke'/%3E%3Ccircle cx='1803.71' cy='638.83' r='638.33' vector-effect='non-scaling-stroke'/%3E%3Ccircle cx='1220.57' cy='661.31' r='55.2' vector-effect='non-scaling-stroke'/%3E%3Ccircle cx='1220.57' cy='441.06' r='55.2' vector-effect='non-scaling-stroke'/%3E%3Ccircle cx='1100.38' cy='995.36' r='55.2' vector-effect='non-scaling-stroke'/%3E%3Ccircle cx='1341.05' cy='995.36' r='55.2' vector-effect='non-scaling-stroke'/%3E%3C/g%3E%3C/svg%3E"); }
+.rings-sm { --rings-size: 360px; }
+.rings-lg { --rings-size: 820px; }
+.rings-top-right { top: calc(var(--rings-size) * -0.12); right: calc(var(--rings-size) * -0.28); }
+.rings-bottom-left { bottom: calc(var(--rings-size) * -0.22); left: calc(var(--rings-size) * -0.3); }
+.rings-center { top: 50%; left: 50%; translate: -50% -50%; }
+.surface-brand .rings { --rings-color: color-mix(in srgb, var(--white) 30%, transparent); }
+.surface-deep .rings { --rings-color: var(--blue-700); }
+
+/* ---------- Icons ---------- */
+.icon {
+  width: 1.25em;
+  height: 1.25em;
+  flex-shrink: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.icon-sprite { display: none; }
+
+.icon-tile {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: var(--space-48);
+  height: var(--space-48);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--blue-400), var(--blue-600));
+  color: var(--white);
+  box-shadow: 0 var(--space-8) var(--space-24) calc(var(--space-8) * -1) color-mix(in srgb, var(--blue-600) 70%, transparent);
+}
+.icon-tile .icon { width: var(--space-24); height: var(--space-24); }
+.icon-tile-orange { background: linear-gradient(135deg, var(--orange-300), var(--orange-500)); color: var(--blue-950); box-shadow: 0 var(--space-8) var(--space-24) calc(var(--space-8) * -1) color-mix(in srgb, var(--orange-600) 70%, transparent); }
+.icon-tile-deep { background: linear-gradient(135deg, var(--blue-700), var(--blue-900)); box-shadow: 0 var(--space-8) var(--space-24) calc(var(--space-8) * -1) color-mix(in srgb, var(--blue-900) 70%, transparent); }
+.icon-tile-soft { background: var(--blue-100); color: var(--blue-600); box-shadow: none; }
+.icon-tile-sm { width: var(--space-32); height: var(--space-32); border-radius: var(--radius-md); }
+.icon-tile-sm .icon { width: var(--space-16); height: var(--space-16); }
+
+/* ---------- Avatars ---------- */
+.avatar {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: var(--space-48);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue-500), var(--blue-800));
+  color: var(--white);
+  font-size: var(--text-md);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.02em;
+}
+.avatar-orange { background: linear-gradient(135deg, var(--orange-300), var(--orange-500)); color: var(--blue-950); }
+.avatar-lg { width: 160px; font-size: var(--text-3xl); }
+/* A portrait with an outer ring. */
+.avatar-ringed { position: relative; outline: 1px solid var(--blue-200); outline-offset: var(--space-12); }

@@ -1,0 +1,22 @@
+/* Pills: short uppercase labels ("Day 1 – Day 30", "Webinar", "New"). From the print pieces.
+   Not buttons: pills are never clickable. */
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-4) var(--space-12);
+  border-radius: var(--radius-pill);
+  background: var(--blue-100);
+  color: var(--blue-800);
+  font-size: var(--text-xs);
+  line-height: var(--leading-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.pill-accent { background: var(--orange-100); color: var(--orange-800); }
+.pill-success { background: var(--green-100); color: var(--green-800); }
+/* Solid fills on dark surfaces: a translucent white tint would drop the label below AA. */
+.surface-brand .pill { background: var(--blue-800); color: var(--white); }
+.surface-deep .pill { background: var(--blue-700); color: var(--white); }

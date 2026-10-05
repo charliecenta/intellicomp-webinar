@@ -1,0 +1,84 @@
+/* Layout primitives: container, section, surfaces, grid, cluster, split. Mobile-first. */
+
+.container {
+  width: 100%;
+  max-width: calc(var(--layout-container) + 2 * var(--layout-gutter-mobile));
+  margin-inline: auto;
+  padding-inline: var(--layout-gutter-mobile);
+}
+@media (min-width: 768px) {
+  .container { max-width: calc(var(--layout-container) + 2 * var(--layout-gutter-desktop)); padding-inline: var(--layout-gutter-desktop); }
+}
+
+/* Section: the vertical rhythm of a page. */
+.section { padding-block: var(--layout-section-mobile); }
+@media (min-width: 768px) { .section { padding-block: var(--layout-section-desktop); } }
+
+/* Surfaces. Each one re-points the semantic roles, so text, links, focus rings and
+   buttons inside it adapt without extra classes. Cards reset to light (see card.css). */
+.surface-subtle { background: var(--color-surface-subtle); }
+.surface-brand {
+  background: var(--color-surface-brand);
+  --color-text: var(--color-on-brand-text);
+  --color-text-heading: var(--color-on-brand-heading);
+  --color-text-muted: var(--color-on-brand-muted);
+  --color-link: var(--color-on-brand-link);
+  --color-link-hover: var(--color-on-brand-link);
+  --color-border: var(--color-on-brand-border);
+  --color-accent: var(--color-on-brand-accent);
+  --color-focus: var(--color-on-brand-focus);
+  color: var(--color-text);
+}
+.surface-deep {
+  background: var(--color-surface-deep);
+  --color-text: var(--color-on-deep-text);
+  --color-text-heading: var(--color-on-deep-heading);
+  --color-text-muted: var(--color-on-deep-muted);
+  --color-link: var(--color-on-deep-link);
+  --color-link-hover: var(--color-on-deep-link-hover);
+  --color-border: var(--color-on-deep-border);
+  --color-accent: var(--color-on-deep-accent);
+  --color-focus: var(--color-on-deep-focus);
+  color: var(--color-text);
+}
+/* White on Intellicomp Blue is 4.39:1, so AA only for LARGE text (≥ 24px, or ≥ 18.66px bold).
+   These rules make everything on the brand surface large automatically. Keep the content short:
+   a heading, one sentence, the orange button. Anything more belongs on .surface-deep. */
+.surface-brand p, .surface-brand li { font-size: var(--text-xl); line-height: var(--leading-xl); }
+.surface-brand .btn, .surface-brand .link-arrow { font-size: var(--text-lg); font-weight: var(--font-weight-bold); }
+.surface-brand .eyebrow { display: inline-flex; padding: var(--space-4) var(--space-12); border-radius: var(--radius-pill); background: var(--blue-800); color: var(--white); }
+
+/* Grid: one column on phones; columns appear as space allows. */
+.grid { display: grid; gap: var(--space-24); }
+@media (min-width: 768px) {
+  .grid { gap: var(--space-32); }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px) {
+  .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* Split: text beside media or a form. Stacks on phones. */
+.split { display: grid; gap: var(--space-48); align-items: center; }
+@media (min-width: 1024px) { .split { grid-template-columns: 1fr 1fr; gap: var(--space-64); } }
+
+/* Cluster: a wrapping row (buttons, pills, logos). */
+.cluster { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-16); }
+
+/* Hero: the first section of a page. More room than a normal section. */
+.hero { padding-block: var(--space-64); }
+@media (min-width: 1024px) { .hero { padding-block: var(--space-96); } }
+.hero .split { gap: var(--space-64); }
+@media (min-width: 1024px) { .hero .split { grid-template-columns: 1fr 1.05fr; } }
+
+/* Steps: a numbered sequence with icon tiles joined by a line. */
+.steps { list-style: none; padding: 0; display: grid; gap: var(--space-32); }
+.steps li { position: relative; display: flex; gap: var(--space-16); align-items: flex-start; }
+.steps li:not(:last-child)::before { content: ""; position: absolute; left: calc(var(--space-24) - 1px); top: var(--space-48); bottom: calc(var(--space-32) * -1); width: 2px; background: var(--blue-100); }
+.steps h3 { font-size: var(--text-lg); line-height: var(--leading-lg); }
+.steps p { color: var(--color-text-muted); }
+
+/* Center a section's header. */
+.section-head { max-width: 760px; margin-inline: auto; text-align: center; }
+.section-head > * { margin-inline: auto; }
